@@ -43,13 +43,23 @@ public class ItemFactory {
     }
 
     private Item generateItem(String[] itemComposition) throws Exception {
-        if (itemComposition[0].isEmpty()) {
+        String name = itemComposition[0];
+        int qt = Integer.parseInt(itemComposition[1]);
+        int price = Integer.parseInt(itemComposition[2]);
+
+        if (name.isEmpty()) {
             throw new IllegalArgumentException(ErrorCode.EMPTY.getValue());
         }
 
-        return new Item(itemComposition[0],
-                Integer.parseInt(itemComposition[1]),
-                Integer.parseInt(itemComposition[2]));
+        if (!isCorrectPrice(price)) {
+            throw new IllegalArgumentException(ErrorCode.WRONG_PRICE.getValue());
+        }
+
+        return new Item(name, qt, price);
+    }
+
+    private boolean isCorrectPrice(int price) {
+        return price < 100 || price % 10 != 0;
     }
 
 }

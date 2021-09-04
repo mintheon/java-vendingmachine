@@ -1,6 +1,5 @@
 package view;
 
-
 import enums.ErrorCode;
 import model.Item;
 import model.ItemFactory;
@@ -20,16 +19,22 @@ public class Input implements InputInterface {
         while (true) {
             try {
                 output.setMachineCoin();
-                int coin = scanner.nextInt();
 
-                return coin;
+                return scanner.nextInt();
             } catch (InputMismatchException e) {
                 output.errorPrint(ErrorCode.NOT_NUMBER.getValue());
+                continue;
+            } catch (Exception e) {
+                output.errorPrint(e.getMessage());
                 continue;
             } finally {
                 bufferClear();
             }
         }
+    }
+
+    public void bufferClear() {
+        scanner.nextLine();
     }
 
     public List<Item> chargeItems() {
@@ -50,9 +55,6 @@ public class Input implements InputInterface {
             } catch (NumberFormatException e) {
                 output.errorPrint(ErrorCode.NOT_NUMBER.getValue());
                 continue;
-            } catch (IllegalArgumentException e) {
-                output.errorPrint(e.getMessage());
-                continue;
             } catch (Exception e) {
                 output.errorPrint(e.getMessage());
                 continue;
@@ -72,7 +74,21 @@ public class Input implements InputInterface {
         return true;
     }
 
-    public void bufferClear() {
-        scanner.nextLine();
+    public int putMoney() {
+        while (true) {
+            try {
+                output.setInputPrice();
+
+                return scanner.nextInt();
+            } catch (InputMismatchException e) {
+                output.errorPrint(ErrorCode.NOT_NUMBER.getValue());
+                continue;
+            } catch (Exception e) {
+                output.errorPrint(e.getMessage());
+                continue;
+            } finally {
+                bufferClear();
+            }
+        }
     }
 }

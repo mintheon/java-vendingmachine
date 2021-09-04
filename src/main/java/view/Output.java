@@ -14,6 +14,10 @@ public class Output {
         System.out.println(ITEM_QT_PRICE);
     }
 
+    public void setInputPrice() {
+        System.out.println(INPUT_PRICE);
+    }
+
     public void errorPrint(String message) {
         System.out.println(message);
     }
