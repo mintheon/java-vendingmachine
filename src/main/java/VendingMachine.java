@@ -1,4 +1,5 @@
-import model.Machine;
+import model.Items;
+import model.VendingService;
 import view.Input;
 
 public class VendingMachine {
@@ -9,7 +10,8 @@ public class VendingMachine {
 
     public void on() {
         int coin = input.setCoin();
+        Items items = new Items(input.chargeItems());
 
-        Machine machine = new Machine();
+        VendingService vendingService = new VendingService();
     }
 }
