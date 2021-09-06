@@ -59,7 +59,7 @@ public class ItemFactory {
     }
 
     private boolean isCorrectPrice(int price) {
-        return price < 100 || price % 10 != 0;
+        return price >= 100 || price % 10 != 0;
     }
 
 }
