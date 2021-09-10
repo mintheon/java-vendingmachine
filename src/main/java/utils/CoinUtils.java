@@ -2,16 +2,21 @@ package utils;
 
 import enums.Coin;
 
-public class CoinUtils {
+import java.util.Random;
 
-    //CHECKME: 완전히 랜덤을 돌리기 때문에 해당 동전들이 딱 입력금액에 맞지 않는 경우가 생김 -> 어떻게 처리할것인가?
+public class CoinUtils {
+    private static final Random random = new Random();
+
     public int generateRandomCoinCount(Coin coin, int chargeAmount) {
         if (chargeAmount <= 0) {
             return 0;
         }
 
         int maxCount = coin.maxCount(chargeAmount);
+        if (maxCount == 0) {
+            return 0;
+        }
 
-        return (int) (Math.random() * maxCount);
+        return random.nextInt(maxCount + 1);
     }
 }

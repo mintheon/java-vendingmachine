@@ -18,8 +18,8 @@ public class Coins {
                 .forEach(coin -> this.coins.put(coin, MIN_COUNT));
     }
 
-    public void chargeCoin(Coin coin, int count) {
-        if (count == 0) {
+    public void charge(Coin coin, int count) {
+        if (count == MIN_COUNT) {
             return;
         }
 
@@ -31,7 +31,39 @@ public class Coins {
     }
 
     public int totalAmount() {
-        return EnumSet.allOf(Coin.class).stream()
-                .mapToInt((coin) -> coin.carculateAmount(coins.get(coin))).sum();
+        return coins.keySet().stream()
+                .mapToInt((coin) -> coin.carculateAmount(coins.get(coin)))
+                .sum();
+    }
+
+    public void smallChange(int inputMoney) {
+        int remainAmount = inputMoney;
+
+        System.out.println("잔돈");
+
+        for (Coin coin : coins.keySet()) {
+            if (remainAmount == MIN_COUNT) {
+                return;
+            }
+
+            int count = carculateCount(coin, remainAmount);
+            if (count == MIN_COUNT) {
+                continue;
+            }
+
+            System.out.println(coin.getAmount() + "원 - " + count + "개");
+
+            remainAmount -= coin.carculateAmount(count);
+        }
+    }
+
+    private int carculateCount(Coin coin, int remainAmount) {
+        int maxCount = coin.maxCount(remainAmount);
+
+        if (coins.get(coin) < maxCount) {
+            return coins.get(coin);
+        }
+
+        return maxCount;
     }
 }

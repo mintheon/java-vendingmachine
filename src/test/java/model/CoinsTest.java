@@ -15,10 +15,10 @@ class CoinsTest {
     void init() {
         coins = new Coins();
 
-        coins.chargeCoin(Coin.FIVE_HUNDRED, 3);
-        coins.chargeCoin(Coin.ONE_HUNDRED, 3);
-        coins.chargeCoin(Coin.FIFTY, 3);
-        coins.chargeCoin(Coin.TEN, 3);
+        coins.charge(Coin.FIVE_HUNDRED, 3);
+        coins.charge(Coin.ONE_HUNDRED, 3);
+        coins.charge(Coin.FIFTY, 3);
+        coins.charge(Coin.TEN, 3);
     }
 
     @Test

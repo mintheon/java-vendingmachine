@@ -2,9 +2,10 @@ package model;
 
 import enums.ErrorCode;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ItemFactory {
@@ -13,8 +14,8 @@ public class ItemFactory {
     public ItemFactory() {
     }
 
-    public List<Item> generateItems(String[] itemsInfo) throws Exception {
-        List<Item> items = new ArrayList<>();
+    public Map<Item, Integer> generateItems(String[] itemsInfo) throws Exception {
+        Map<Item, Integer> items = new HashMap<>();
         List<String> removedBracketItemsInfo = removeBrackets(itemsInfo);
 
         for (String itemInfo : removedBracketItemsInfo) {
@@ -24,7 +25,12 @@ public class ItemFactory {
                 throw new IllegalArgumentException(ErrorCode.WRONG_FORMAT.getValue());
             }
 
-            items.add(generateItem(itemComposition));
+            int qt = Integer.parseInt(itemComposition[1]);
+            if (!isCorrectQt(qt)) {
+                throw new IllegalArgumentException(ErrorCode.NOT_ZERO.getValue());
+            }
+
+            items.put(generateItem(itemComposition), qt);
         }
 
         return items;
@@ -44,7 +50,6 @@ public class ItemFactory {
 
     private Item generateItem(String[] itemComposition) throws Exception {
         String name = itemComposition[0];
-        int qt = Integer.parseInt(itemComposition[1]);
         int price = Integer.parseInt(itemComposition[2]);
 
         if (name.isEmpty()) {
@@ -55,11 +60,15 @@ public class ItemFactory {
             throw new IllegalArgumentException(ErrorCode.WRONG_PRICE.getValue());
         }
 
-        return new Item(name, qt, price);
+        return new Item(name, price);
     }
 
     private boolean isCorrectPrice(int price) {
         return price >= 100 || price % 10 != 0;
+    }
+
+    private boolean isCorrectQt(int qt) {
+        return qt > 0;
     }
 
 }

@@ -14,5 +14,6 @@ public class VendingMachine {
         int amountOfMoney = input.putMoney();
 
         VendingService vendingService = new VendingService(amountOfCoin, items, amountOfMoney);
+        vendingService.start();
     }
 }

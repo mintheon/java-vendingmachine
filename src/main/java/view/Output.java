@@ -6,19 +6,23 @@ public class Output {
     private static final String INPUT_PRICE = "투입 금액을 입력해 주세요.";
     private static final String BUY_ITEM = "구매할 상품명을 입력해 주세요.";
 
-    public void setMachineCoin() {
+    public static void setBuyItem() {
+        System.out.println(BUY_ITEM);
+    }
+
+    public static void setMachineCoin() {
         System.out.println(MACHINE_SET_COIN);
     }
 
-    public void setItems() {
+    public static void setItems() {
         System.out.println(ITEM_QT_PRICE);
     }
 
-    public void setInputPrice() {
+    public static void setInputPrice() {
         System.out.println(INPUT_PRICE);
     }
 
-    public void errorPrint(String message) {
+    public static void print(String message) {
         System.out.println(message);
     }
 }
