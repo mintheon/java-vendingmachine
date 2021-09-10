@@ -1,17 +1,19 @@
 package enums;
 
 public enum Coin {
-    FIVE_HUNDRED(500, "500원"),
-    ONE_HUNDRED(100, "100원"),
-    FIFTY(50, "50원"),
-    TEN(10, "10원");
+    FIVE_HUNDRED(500),
+    ONE_HUNDRED(100),
+    FIFTY(50),
+    TEN(10);
 
     private int amount;
-    private String name;
 
-    Coin(int amount, String name) {
+    Coin(int amount) {
         this.amount = amount;
-        this.name = name;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 
     public int maxCount(int amountOfCoin) {
