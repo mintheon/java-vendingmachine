@@ -16,4 +16,18 @@ public class Item {
     public boolean isSameName(String targetName) {
         return name.equals(targetName);
     }
+
+    @Override
+    public boolean equals(Object target) {
+        if (this == target) {
+            return true;
+        }
+
+        if (target == null || getClass() != target.getClass()) {
+            return false;
+        }
+
+        Item item = (Item) target;
+        return name.equals(item.name) && price == item.price;
+    }
 }

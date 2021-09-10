@@ -36,7 +36,7 @@ public class ItemFactory {
         return items;
     }
 
-    private List<String> removeBrackets(String[] itemsText) {
+    public List<String> removeBrackets(String[] itemsText) {
         return Arrays.stream(itemsText)
                 .map(itemText ->
                         itemText.replace("[", "")
@@ -44,11 +44,11 @@ public class ItemFactory {
                 .collect(Collectors.toList());
     }
 
-    private boolean isCorrectCompositionCount(String[] itemComposition) {
+    public boolean isCorrectCompositionCount(String[] itemComposition) {
         return itemComposition.length == 3;
     }
 
-    private Item generateItem(String[] itemComposition) throws Exception {
+    public Item generateItem(String[] itemComposition) throws Exception {
         String name = itemComposition[0];
         int price = Integer.parseInt(itemComposition[2]);
 
@@ -63,11 +63,11 @@ public class ItemFactory {
         return new Item(name, price);
     }
 
-    private boolean isCorrectPrice(int price) {
+    public boolean isCorrectPrice(int price) {
         return price >= 100 || price % 10 != 0;
     }
 
-    private boolean isCorrectQt(int qt) {
+    public boolean isCorrectQt(int qt) {
         return qt > 0;
     }
 
